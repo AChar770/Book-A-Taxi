@@ -19,6 +19,8 @@ function BookRide() {
 
   const validate = () => {
     const nextErrors = {};
+    const selectedDate = formData.date ? new Date(formData.date) : null;
+    const today = new Date(minDate);
 
     if (!formData.fullName.trim()) {
       nextErrors.fullName = 'Full name is required.';
@@ -28,7 +30,7 @@ function BookRide() {
       nextErrors.email = 'Enter a valid email address.';
     }
 
-    if (!/^\d{10,15}$/.test(formData.phone)) {
+    if (!/^\d{10,15}$/.test(formData.phone.trim())) {
       nextErrors.phone = 'Phone must be 10-15 digits only.';
     }
 
@@ -46,6 +48,8 @@ function BookRide() {
 
     if (!formData.date) {
       nextErrors.date = 'Select a ride date.';
+    } else if (selectedDate < today) {
+      nextErrors.date = 'Ride date cannot be in the past.';
     }
 
     setErrors(nextErrors);
@@ -82,6 +86,7 @@ function BookRide() {
             onChange={handleChange}
             type="text"
             placeholder="Jane Doe"
+            aria-invalid={Boolean(errors.fullName)}
           />
           {errors.fullName && <span className="error">{errors.fullName}</span>}
         </label>
@@ -94,6 +99,7 @@ function BookRide() {
             onChange={handleChange}
             type="email"
             placeholder="jane@example.com"
+            aria-invalid={Boolean(errors.email)}
           />
           {errors.email && <span className="error">{errors.email}</span>}
         </label>
@@ -106,6 +112,7 @@ function BookRide() {
             onChange={handleChange}
             type="tel"
             placeholder="1234567890"
+            aria-invalid={Boolean(errors.phone)}
           />
           {errors.phone && <span className="error">{errors.phone}</span>}
         </label>
@@ -118,6 +125,7 @@ function BookRide() {
             onChange={handleChange}
             type="text"
             placeholder="Times Square"
+            aria-invalid={Boolean(errors.pickup)}
           />
           {errors.pickup && <span className="error">{errors.pickup}</span>}
         </label>
@@ -130,6 +138,7 @@ function BookRide() {
             onChange={handleChange}
             type="text"
             placeholder="JFK Airport"
+            aria-invalid={Boolean(errors.dropoff)}
           />
           {errors.dropoff && <span className="error">{errors.dropoff}</span>}
         </label>
@@ -140,6 +149,7 @@ function BookRide() {
             name="serviceType"
             value={formData.serviceType}
             onChange={handleChange}
+            aria-invalid={Boolean(errors.serviceType)}
           >
             <option value="">Choose one</option>
             <option value="city">City Ride</option>
@@ -160,6 +170,7 @@ function BookRide() {
             onChange={handleChange}
             type="date"
             min={minDate}
+            aria-invalid={Boolean(errors.date)}
           />
           {errors.date && <span className="error">{errors.date}</span>}
         </label>

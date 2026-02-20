@@ -1,12 +1,5 @@
 import { NavLink } from 'react-router-dom';
-
-const links = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
-  { to: '/services', label: 'Services' },
-  { to: '/book-ride', label: 'Book Ride' },
-  { to: '/contact', label: 'Contact' }
-];
+import { navLinks } from '../data/navLinks';
 
 function Navbar() {
   return (
@@ -17,7 +10,7 @@ function Navbar() {
       </div>
       <nav>
         <ul className="nav-list">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.to}>
               <NavLink
                 className={({ isActive }) =>
