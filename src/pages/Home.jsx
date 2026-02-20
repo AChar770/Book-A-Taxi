@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 function Home() {
   return (
     <section className="panel hero-panel">
-      <h1>Ride Smarter Across the City</h1>
+      <h1>Ride Smarter not Harder</h1>
       <p>
-        Quick pickups, fixed pricing, and trained drivers for airport transfers,
+        Quick pickups, fixed pricing, and trained human drivers for airport transfers,
         city tours, and everyday travel.
       </p>
       <div className="hero-actions">
